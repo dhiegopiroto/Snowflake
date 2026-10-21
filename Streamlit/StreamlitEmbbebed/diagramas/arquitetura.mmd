@@ -1,0 +1,24 @@
+%% Arquitetura - Streamlit in Snowflake embedded
+flowchart LR
+  subgraph laptop [Seu laptop]
+    Browser["Navegador localhost:8080"]
+    Portal["Portal Flask app.py"]
+  end
+  subgraph sf [Snowflake]
+    Api["REST API generate-embed-url"]
+    subgraph pool [Compute pool EMBED_POOL]
+      AppOwner["RELATORIO_VENDAS owner's rights"]
+      AppRbac["RELATORIO_VENDAS_RBAC caller's rights"]
+    end
+    Gold["EMBED_DEMO.GOLD"]
+    Policies["MP_FATURAMENTO e RAP_LOJAS"]
+  end
+  Browser -->|"1 login"| Portal
+  Portal -->|"2 PAT + role"| Api
+  Api -->|"3 embed_url"| Portal
+  Portal -->|"4 HTML com iframe"| Browser
+  Browser -->|"5 iframe"| AppOwner
+  Browser -->|"5 iframe"| AppRbac
+  AppOwner -->|"role do owner"| Gold
+  AppRbac -->|"role do viewer"| Gold
+  Policies --> Gold

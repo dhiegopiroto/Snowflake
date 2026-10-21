@@ -7,7 +7,7 @@ Cada pasta na raiz é um projeto autocontido: setup → execução → teardown.
 
 | Projeto | Artigo | Versão |
 |---|---|---|
-| _(em breve)_ | | |
+| Streamlit Embedding | | |
 
 ## Como usar
 

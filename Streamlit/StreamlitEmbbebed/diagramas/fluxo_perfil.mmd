@@ -1,0 +1,16 @@
+%% Fluxo de uma visita na aba "Acesso por Perfil"
+sequenceDiagram
+  participant User as Navegador
+  participant Portal as Flask
+  participant Api as Snowflake API
+  participant App as RELATORIO_VENDAS_RBAC
+  participant Gold as EMBED_DEMO.GOLD
+  User->>Portal: GET /perfis?usuario=ana.jr
+  Portal->>Portal: ana.jr vira EMBED_SVC_JR + ANALISTA_JR
+  Portal->>Api: POST generate-embed-url com PAT_JR e role ANALISTA_JR
+  Api-->>Portal: embed_url de uso unico, 10 min
+  Portal-->>User: pagina com iframe src=embed_url
+  User->>App: abre o iframe
+  App->>Gold: queries como EMBED_SVC_JR / ANALISTA_JR
+  Gold-->>App: lojas 2 e 3, faturamento NULL
+  App-->>User: relatorio filtrado

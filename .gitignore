@@ -1,0 +1,30 @@
+# Credenciais / Snowflake
+.env
+.env.*
+*.p8
+*.pem
+*.key
+connections.toml
+config.toml
+.snowflake/
+**/secrets*
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+.pytest_cache/
+
+# Notebooks
+.ipynb_checkpoints/
+
+# dbt
+target/
+dbt_packages/
+logs/
+
+# OS / IDE
+.DS_Store
+.vscode/
+.idea/
